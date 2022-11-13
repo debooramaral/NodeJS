@@ -1,0 +1,89 @@
+npm -v (para ver a versão)
+
+npm init (iniciando um pacote com npm)
+
+package.json
+	-  é um objeto js
+	- propriedade "name":"NodeJS",
+	- a não ser que seja objeto ou array
+	- opção de alterar e colocar coisas
+
+instalando dependencias - modulos de terceiros
+
+	npm instal cfonts
+
+dependencias de desenvolvimento e atualização
+
+	npm i cfonts
+	npm i cfonts -D
+	(opção em que utilizo somente  no ambiente de desenvolvimento)
+	npm i cfonts, inquirer opn (instalar varias)
+
+cuidado ao manipular o package.json, com a sintaxe e estrutura
+
+	npm update (remapear tudo no package-lock)
+
+o que é diretorio node_modules
+
+	- não envia para o repositorio
+	- podemos apagara pasta
+	npm install (ja sabe as dependencia e trás tudo de novo)
+
+package-lock.json
+	
+	- não colocamos a mãe, não mexemos
+	- faz a manutenção de modulos, mapeamento
+	- rapidez e inteligência
+
+criando e rodando scripts
+	
+	- teste: vem por padrão
+	npm run test (vem com uma mensagem padrão)
+	npm run start + index.js + console.log('rodando via script')
+	npm start (especial)
+	npm run "nome" do script.. regra pra todos os demais script
+
+instalando dependencias globais
+
+	- instalar na maquina como um todo
+	npm i opn -g
+	- não aparece no node modules e nem no package.json
+	npm root -g (saber onde esta, resultado é o caminho)
+	npm uninstall opn -g (desinstalar o pacote)
+
+gerenciando versoes das dependencias
+
+	npm i moment
+	- criou-se node modules e apareceu no package.json
+	- major.minor.patch
+	patch (resolvendo bug)
+	minor (vai ter alterações que nao quebre o que acontece no pacote)
+	major (versão do projeto, pode-se até quebrar)
+	^ (atualiza as duas ultimas, patch e minor)
+	~ (atualiza somente o patch)
+	sem sinal (manter a versão fixa, nunca vai mudar)
+	* (muda todas as versões)
+	- não é aconselhavel fica mexendo no package.json pois é perigoso
+
+versão antiga
+
+	npm i moment@1.5.1
+	-  muda o package.json e informa falha de segurança, grande/high
+	
+mudar de versão 
+	
+	npm outdated
+	- mostra quais sao os pacotes (pode ser varios)
+	- current(atualizada), desejada(wanted), ultima(latest)
+	npm upgrade
+	- atualiza todos, mas no package.json nao mudou
+	- roda o outdated de novo e o resultado é que o current esta atualizado
+	- package-lock.json mostra que mapeou corretamente, pois em packges esta com a versão antiga, mas node_modules/moment esta com a versão atualizada
+	npm i moment@lateste
+	- para pegar a ultima versão do pacote
+
+removendo pacotes
+	
+	npm uninstall
+	
+	
