@@ -1,0 +1,53 @@
+/*
+Criar 2 arquivos JavaScript.
+- o primeiro ira exportar uma função chamada getFlag() o que receberá um argumento do tipo String.
+- essa função deverá buscar dentro do array process.argv a flag desejada, que é a String e retornar o valor da flag
+
+- o segundo irá importar a função e passar a flag desejada.
+- iremos rodar no terminal o segundo arquivo passando as flags --name e --greting para que seja impresso no terminal a saudação e o nome da pessoa.
+*/
+
+já me confundi no arquivos.. principalmente na parte de buscar dentro do array. 
+	- onde esta esse array???
+
+CORREÇÃO
+
+- digitei export ao inves de exports
+- criando a função no primeiro arquivo e exportando
+	function getFlags(flags) {
+    		retun
+	}
+	module.exports = getFlag;
+	//exportando a function
+
+- procura o número da flag ali dentro, mas colocando o resultado com 'const index' dizendo qual é a posição do array no 'process.argv' da flag +1 que é a proxima ocorrencia, vai buscando dentro da lista as posições:  const index = process.argv.indexOf(flag) + 1
+- pega o resultado da seguinte forma: return process.argv[index]
+
+código fica deste jeito:
+
+	function getFlags(flag) {
+    		const index = process.argv.indexOf(flag) + 1
+    		return process.argv[index]
+	}
+	module.exports = getFlags;
+
+- segundo arquivo
+- fazer a importação, portanto pegou a função e colocou neste 'getFlags': const getFlags = require('./resolucao1')
+- executar no terminal: node resolucao2 --name "Débora Amaral" --greeting "tudo bem com você?"
+- arrumando o console.log de um jeito inteligente e bonito: console.log(`Oi ${getFlags('__name')}. ${getFlags('__greeting')}}`)
+
+código fica deste jeito:
+
+	const getFlags = require('./resolucao1') 
+	console.log(`Oi ${getFlags('--name')}. ${getFlags('--greeting')}`)
+
+ATENTAR AOS TIPOS DE SINAIS DAS EXPRESSOES E ARGUMENTOS !
+ATENTAR PARA ESCREVER TUDO CORRETAMENTE, SEM ESQUECER DE COISAS (+1)
+ATENTAR PARA NÃO ESQUECER DAS LETRAS DAS PALAVRAS, CERTINHO (flags e não flag)
+
+corrigido:
+Resultado: Oi Débora Amaral. tudo bem com você?
+
+O grande lance, é que podemos inverter os valores...
+
+no terminal: node resolucao2 --greeting "C ta de boa?" --name "Deeh"

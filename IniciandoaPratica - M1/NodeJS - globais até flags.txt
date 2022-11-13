@@ -1,0 +1,125 @@
+Executando o primeiro arquivo e entendendo globais
+
+- fiz um arquivo 'console.js' na pasta desejada (lembrando qe a configuração com o gitbash precisa estar feita)
+- escrevi um script
+- executei:
+	node console.js (terminal do vscode)
+	ou node console (mostra a mesma coisa que escrevi)
+
+o console faz parte das variaveis global
+
+VARIAVEIS GLOBAL ---------
+
+PARA SABER MAIS SOBRE: console.log(global) ou a documentação (https://nodejs.org/en/docs/)
+
+ATUALIZE A VERSÃO (USANDO 16.15.1): npm install npm@latest -g
+DEPOIS: node -v (continua na mesma)
+
+https://nodejs.org/docs/latest-v16.x/api/globals.html 
+	- todas ou boa parte de variaveis do node
+	- testado o __dirname e __filename 
+
+O que são e como utilizar módulos? 
+
+REQUIRE ---------------------- (modulos)
+
+console.log(require())
+
+o que faz sem nenhum argumento? da um erro de invalido, pois sempre precisa ter argumento 'tipo de argumento invalido' ('ERR_INVALID_ARG_TYPE')
+
+console.log(require(path))
+
+resultado: é um objeto
+	- possui varios nomes de coisas
+
+criaremos um objeto:
+
+const path = require('path')
+console.log()
+	
+require: é uma maneira de chamar modulos qe já são nativos do nodejs ou modulos que podemor criar, e até mesmo instalar no node
+
+path: modulo que ja existe dentro do node (documentação)
+
+const path = require('path')
+console.log(path.basename(__filename))
+
+aqui eu busco uma função (basename) que pede um argumento, basename de que arquivo (__filename)
+
+*adicionamos modulos dentro do nosso arquivo
+
+Criando modulos
+
+exports ----------
+
+criei um arquivo export.js
+
+uso: module.export = 
+	- posso atribuir {} (objeto)
+	- posso atribuir [] (array)
+	- posso atribuir "" (string)
+	- posso atribuir 10 (número)
+ex.: module.export = "Enviando dados do meu módulo"
+
+volto no require (arquivo) e chamo o meu módulo
+
+const myModules = require('./export')
+	- dou um nome, chamo o require e digo o caminho onde ele está, junto com o nome do arquivo
+
+vejamos se funciona:
+
+const myModules = require('./export')
+console.log(myModules)
+
+ATENTAR PARA O NOME CERTO DAS FUNÇÕES export =! exports (palavra reservada do nodejs)
+
+Pegando informações do processo
+
+process ------------
+
+console.log(process)
+	- tras um monte de opções
+
+console.log(process.argv)
+	- trouxe o node exe e o arquivo
+	- o argv: trás a lista/array de argumentos que esta rodando no node, desde o node até process digitado no terminal
+
+ex.:
+
+const firstName = process.argv[2]
+const lastName = process.argv[3]
+console.log('seu nome é', process.argv[2] + ' ' + process.argv[3])
+
+explorando com meu nome no terminal: node process Débora Amaral
+resultado: seu nome é Débora Amaral
+
+utilizado de forma, concatenando!
+
+ex.:
+
+const firstName = process.argv[2]
+const lastName = process.argv[3]
+console.log(`Seu nome é ${firstName} ${lastName}`)
+
+terminal: node process Débora Amaral
+resultado: Seu nome é Débora Amaral
+
+utilizando de forma, interpolando
+
+o process eu posso pegar os argumentos e colocar dentro do nosso programa, então o process é o objeto que esta falando do processo que esta sendo rodado no node, o processo tem id, tem a versão do node, tem varias coisas, o caminho do processo, porta debugPort, enfim, todas as informações do processo
+
+Passando flags como argumento
+
+flag ---------------- (--name --greting etc)
+
+Para executar processos, arquivos dentro do terminal de outra forma, podemos:
+
+ex.:node process --name "Débora Amaral" --greting "tudo bem com você? :)"
+
+lembrando que no código deve ter: console.log(process.argv)
+
+podendo até inverter posições, da forma descrita acima.. entretando serve como desafio, escrever de forma inteligente isso!
+
+
+
+
