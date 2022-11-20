@@ -1,0 +1,94 @@
+CRIAR APLICATIVO!
+
+* encontre sua melhor versão
+	- use o app ao final de cada dia para refletir sobre sua jornada
+
+O QUE VAMOS APRENDER?
+
+* a se comunicar com o processo enquanto estiver rodando
+
+[] process.stdout
+[] process.stdin
+[] process.on
+[] process.exit
+
+Assincronismo
+
+process.stdout - escrever algo de saída, temos o total controle da string ou qualquer coisa que vai sair
+
+process.stdout.write("\n alguma coisa \n\n"); 
+
+Sumir da tela rapido. No terminal de comando. Mas o meu não aconteceu...
+
+POR DEBAIXO DOS PANOS, o console log usa o process stdout
+
+------------
+
+const questions = [
+    "O que aprendi hoje?",
+    "O que me deixou aborrecido? E o que eu poderia fazer para melhorar?",
+    "O que me deixou feliz hoje?",
+    "Quantas pessoas eu ajudei hoje?",
+]
+const ask = (index = 0) => {
+    process.stdout.write(questions[index] + "\n\n")
+}
+ask()
+
+-------------
+
+nossa aplicação executou o ask, pegando ao index, uma pergunta da lista e parou.
+
+process.stdind.on();
+
+é uma especia de coisa qe fica ouvindo eventos
+
+---------
+
+process.stdin.on("data", (data) => {
+    process.stdout.write(data.toString().trim() + '\n')
+    process.exit()
+});
+
+---------
+
+const answers = []
+process.stdin.on("data", (data) => {
+    answers.push(data.toString().trim())
+    if(answers.length < questions.length){
+        ask(answers.length)
+    } else{
+        console.log(answers)
+        process.exit()
+    }
+});
+
+--------
+
+as explicações estão no código (index.js do BesteMeAPP)
+
+- usamos o console.log bem mais que o process.stdout
+
+--------
+
+process.on('exit', () => {
+    console.log(`
+        Bacana Débora
+        O que você aprendeu hoje foi:
+        ${answers[0]}
+
+        O que te aborreceu e você poderia melhorar foi:
+        ${answers[1]}
+
+        Você ajudou ${answers[3]} pessoas hoje!
+
+        Volte amanhã para novas reflexões
+    `)
+})
+
+--------
+
+ficou bem legal
+
+  
+
