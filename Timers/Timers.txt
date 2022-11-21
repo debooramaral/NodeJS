@@ -1,0 +1,8 @@
+a maneira de trabalhar com tempo dentro do NodeJS
+
+[] setTimeout -  espera um certo tempo e roda a função
+[] clearTimeout - cancelar função criada
+[] setInterval - intervalo de tempo em tempo para executar uma função
+[] clearInterval - cancela o intervalo criado
+
+* assincronismo
