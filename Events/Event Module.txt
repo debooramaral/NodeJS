@@ -1,0 +1,86 @@
+é um mecanismo para 
+- dispara eventos
+- ouvir eventos
+- fazer alguma ação quando ouvir o evento
+- é a base para muitos outros modulos como: http, strem, file system, etc . .
+
+o que vamos aprender?
+* utilizar os eventos
+* dispara eventos
+* ouvir eventos
+* executar ações para determinados eventos
+* entender como ele é a base para outros modulos
+
+para UTILIZA-LOS
+
+const {EventEmitter} = require('events') //função estilo classe 
+const ev = new EventEmitter () // criar novo evento, uso a classe EventEmitter em uma estrutura de função () e recebo o objeto que retorna ev
+
+para DISPARAR
+
+ev.emit() // emit palavra reservada que dispara alguma coisa, utiliza-se '' para mostrar algo
+
+para OUVIR
+
+ev.on() // ligado, utiliza-se o mesmo nome do emit
+
+depois aplica-se uma função dentro, como segundo argumento
+
+ev.on('saySomething', () => {
+    console.log('eu ouvi você')
+})
+
+pode-se passar argumentos também!
+
+//UTILIZANDO . . 
+const {EventEmitter} = require('events')
+const ev = new EventEmitter()
+
+//LIGADO . .
+ev.on('saySomething', (message) => {
+    console.log('eu ouvi você', message)
+})
+
+//DISPARANDO . .
+ev.emit('saySomething', 'débora :)')
+
+se eu colocar mais.. o resultado são todos que eu colocar
+
+ev.emit('saySomething', 'débora :)')  
+ev.emit('saySomething', 'débora :)')  
+ev.emit('saySomething', 'débora :)')  
+
+once ----- uma unica vez!
+
+//UTILIZANDO . . 
+const {EventEmitter} = require('events')
+const ev = new EventEmitter()
+
+//LIGADO . .
+ev.once('saySomething', (message) => {
+    console.log('eu ouvi você', message)
+})
+
+//DISPARANDO . .
+ev.emit('saySomething', 'débora :)')  
+
+
+HERDANDO do EventEmitter
+
+const {inherits} = require('util') //puxo do modulo util, modulo dentro do core do js.. puxa a função inherits (inrerts), que na verdade vai herdar as funcionalidades do eventemitter para a função caracter . .
+const {EventEmitter} = require('events') //funcionalidades
+
+function Character(name){ // função caracter; que ao executar fazendo um new caracter, quero que traga as opções que tem no eventemitter para dentro da minha função
+    this.name = name
+}
+
+inherits(Character, EventEmitter) //basta usar o inherits, função que recebe como 1º argumento a construtora function Character e dentro dela terei opções do eventemitter on/emit faz parte da função também
+
+//ou seja, o eventemitter esta sendo base para eu ter o meu caracter, se não, não funciona
+
+const chapolin = new Character('Chapolin'); //crio a constante, com novo chapolin personagem, estou fazendo um novo personagem de nome chapolin..portando o chapolin ja tem o emit e o on/once pois ja HERDOU
+chapolin.on('help', () => console.log(`Eu! o ${chapolin.name} colorado..}`)) //chapolin escute o help, manda um consolelog
+
+console.log('Oh! e agora, quem poderá me defender?') //dai só coloco o restante da expressão
+chapolin.emit('help') //o caracter vai emitir essa ajuda  
+
